@@ -43,7 +43,6 @@ def main(argv):
 		try:
 			data = c_share.get_historical('2002-04-04', '2017-04-04')
 		except:
-			#visa company doesnt have public trading data before 08
 			data = c_share.get_historical('2008-04-04', '2017-04-04')
 		#call function to write and cleanup
 		dictToCSVFile(target_file, data)
