@@ -10,17 +10,31 @@ import sys
 def dictToCSVFile(fd, share_data):
 
 	#setup column names
-	fd.write("Adj_Close,Close,Date,High,Low,Open,Symbol,Volume\n")
+	columns = []
+	#loop over keys to get column names in order,
+	#dicts are unordered to can't hardcode column names
+	for dictionaries in share_data:
+		#get every value in dict
+		for key, value in dictionaries.items():
+			if key not in columns:
+				#Store keys in a list, then write columns to top
+				columns.append(key)
+	fd.write(','.join(columns) + "\n")
+
+
 	#parse out the dictionaries 
 	for dictionaries in share_data:
 		#get every value in dict
 		for key, value in dictionaries.items():
+			if key not in columns:
+				columns.append(key)
 			#if float else treat as string
 			try:
 				fd.write('%f,' %float(value))
 			except:
 				fd.write('%s,' %value)
 		fd.write('\n')
+		
 def main(argv):
 	
 	#grab filename and read through contens
