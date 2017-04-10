@@ -37,7 +37,7 @@ def dictToCSVFile(fd, share_data):
 		
 def main(argv):
 	
-	#grab filename and read through contens
+	#grab filename and read through contents
 	filename = str(argv[0])
 	with open(filename) as f:
 		company = f.readlines()
