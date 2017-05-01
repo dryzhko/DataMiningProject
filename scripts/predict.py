@@ -54,8 +54,8 @@ def prediction(date, prices, x):
 	plt.ylabel('Price')
 	plt.title('Support Vector Regression')
 	plt.legend()
-	#MAKE X A LIST, AND JUST PRINT THE PREDICTIONS FOR ALL THE VALUES IN THE LIST
-	print"The predicted price on " + formatDate(str(x)) + " is " + str(SVRrbf.predict(x)[0])
+	for date in x:
+		print"The predicted price on " + formatDate(str(date)) + " is " + str(SVRrbf.predict(date)[0])
 	plt.show()
 
 	
@@ -65,10 +65,7 @@ def prediction(date, prices, x):
 
 
 readData(filename)
-
-#prediction(marketDates, marketPrices, dateToPredict)
-for date in inputDates: #INSTEAD OF A LOOP, MAKE X A LIST AND DO JUST 1 FUNCTION CALL
-	prediction(marketDates, marketPrices, date)
+prediction(marketDates, marketPrices, inputDates)
 
 
 
