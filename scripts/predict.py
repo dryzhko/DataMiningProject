@@ -1,5 +1,5 @@
-#TO USE: run with two command line arguments, csv file and date in YYYYMMDD format
-#example: python predict.py aapl.csv 20170405
+#TO USE: run with CSV file as a command line argument, followed by the dates you want predicted in YYYYMMDD format
+#example: python predict.py aapl.csv 20170405 20170406 20170407
 
 #This script uses Support Vector Regression in order to predict the stock price of a stock on a certain day
 #The original data will be plotted, with the model over it, and the prediction will be printed to the terminal
@@ -17,8 +17,12 @@ import matplotlib.pyplot as plt
 marketDates = []
 marketPrices = [] #closing price
 filename = sys.argv[1]
-dateToPredict = sys.argv[2]
-formatedDate = dateToPredict[:4] + '-' + dateToPredict[4:6] + '-' + dateToPredict[6:]
+#dateToPredict = sys.argv[2]
+#predictionDates = []
+inputDates = sys.argv[2:]
+#print(predictionDates)
+
+
 
 def readData(name):
 	with open(name, 'r') as csvfile:
@@ -28,6 +32,10 @@ def readData(name):
 			marketDates.append(int(row[5].replace('-', '')))
 			marketPrices.append(float(row[6]))
 	return
+
+def formatDate(date):
+	formatedDate = date[:4] + '-' + date[4:6] + '-' + date[6:]
+	return formatedDate
 
 def prediction(date, prices, x):
 	dates = np.reshape(date, (len(date), 1))
@@ -46,7 +54,8 @@ def prediction(date, prices, x):
 	plt.ylabel('Price')
 	plt.title('Support Vector Regression')
 	plt.legend()
-	print"The predicted price on " + formatedDate + " is " + str(SVRrbf.predict(x)[0])
+	#MAKE X A LIST, AND JUST PRINT THE PREDICTIONS FOR ALL THE VALUES IN THE LIST
+	print"The predicted price on " + formatDate(str(x)) + " is " + str(SVRrbf.predict(x)[0])
 	plt.show()
 
 	
@@ -56,6 +65,11 @@ def prediction(date, prices, x):
 
 
 readData(filename)
-prediction(marketDates, marketPrices, dateToPredict)
+
+#prediction(marketDates, marketPrices, dateToPredict)
+for date in inputDates: #INSTEAD OF A LOOP, MAKE X A LIST AND DO JUST 1 FUNCTION CALL
+	prediction(marketDates, marketPrices, date)
+
+
 
 
