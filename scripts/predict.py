@@ -1,6 +1,9 @@
 #TO USE: run with CSV file as a command line argument, followed by the dates you want predicted in YYYYMMDD format
 #example: python predict.py aapl.csv 20170405 20170406 20170407
 
+#The script will output a CSV of the date and the prediction on that date, that is used by the compare script to compare
+#to the actual prices on that date
+
 #This script uses Support Vector Regression in order to predict the stock price of a stock on a certain day
 #The original data will be plotted, with the model over it, and the prediction will be printed to the terminal
 
@@ -14,13 +17,12 @@ from sklearn.svm import SVR
 import matplotlib.pyplot as plt
 
 
+
 marketDates = []
 marketPrices = [] #closing price
 filename = sys.argv[1]
-#dateToPredict = sys.argv[2]
-#predictionDates = []
+outputDates = filename.split('.')[0] + "output.csv"
 inputDates = sys.argv[2:]
-#print(predictionDates)
 
 
 
@@ -31,6 +33,7 @@ def readData(name):
 		for row in reader:
 			marketDates.append(int(row[5].replace('-', '')))
 			marketPrices.append(float(row[6]))
+	csvfile.close()
 	return
 
 def formatDate(date):
@@ -54,10 +57,13 @@ def prediction(date, prices, x):
 	plt.ylabel('Price')
 	plt.title('Support Vector Regression')
 	plt.legend()
+	output = open(outputDates, "w")
 	for date in x:
 		print"The predicted price on " + formatDate(str(date)) + " is " + str(SVRrbf.predict(date)[0])
+		output.write(date + "," + str(SVRrbf.predict(date)[0]) + "\n")
+	
+	output.close()
 	plt.show()
-
 	
 	#return SVRrbf.predict(x)[0], SVRlin.predict(x)[0], SVRpoly.predict(x)[0]
 	return SVRrbf.predict(x)[0]
