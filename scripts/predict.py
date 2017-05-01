@@ -1,5 +1,8 @@
 #TO USE: run with CSV file as a command line argument, followed by the dates you want predicted in YYYYMMDD format
-#example: python predict.py aapl.csv 20170405 20170406 20170407
+#example: python predict.py aapl.csv 20170405 20170406 20170407 20170410
+#MAKE SURE THE STOCK MARKET IS ACTUALLY OPEN ON THE DAYS YOU ENTER, AND TRY TO ENTER CONSECUTIVE DAYS WITHOUT GAPS FOR
+#BEST RESULTS. IN ORDER FOR compare.py TO WORK, DATES MUST BE CONTINUOUS WITH NO DAYS SKIPPED, AND MUST BE DAYS THE
+#MARKET IS OPEN!!! (ex. Not open on weekends, so don't include those days)
 
 #The script will output a CSV of the date and the prediction on that date, that is used by the compare script to compare
 #to the actual prices on that date
