@@ -5,10 +5,11 @@ Chandler Baggett, Jacob Toomey, Dmytro Ryzhkov
 
 
 
-# Scripts:
+# Scripts
 
 # get_data.py:
 Uses the Yahoo Finance API to pull information from stocks specified in a txt file and puts them into a csv.
+
 Usage: python get_data.py filename
 
 # predict.py: 
