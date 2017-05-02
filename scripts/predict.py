@@ -70,8 +70,6 @@ def prediction(date, prices, x):
 	output.close()
 	plt.show()
 	
-	#return SVRrbf.predict(x)[0], SVRlin.predict(x)[0], SVRpoly.predict(x)[0]
-	#return SVRrbf.predict(x)[0]
 	
 
 

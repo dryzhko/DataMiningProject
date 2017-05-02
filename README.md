@@ -27,6 +27,7 @@ While we did not get the most accurate prices, our model was able to accurately 
 
 # Video Demonstration
 
+http://www.screencast.com/t/6Cxg1LgweN
 
 
 
