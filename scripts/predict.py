@@ -24,8 +24,10 @@ import matplotlib.pyplot as plt
 marketDates = []
 marketPrices = [] #closing price
 filename = sys.argv[1]
+stockName = filename[:-4]
 outputDates = filename.split('.')[0] + "output.csv"
 inputDates = sys.argv[2:]
+
 
 
 
@@ -58,11 +60,11 @@ def prediction(date, prices, x):
 	#plt.plot(dates, SVRpoly.predict(dates), color='blue', label = 'Polynomial model')
 	plt.xlabel('Date')
 	plt.ylabel('Price')
-	plt.title('Support Vector Regression')
+	plt.title('Support Vector Regression for ' + stockName)
 	plt.legend()
 	output = open(outputDates, "w")
 	for date in x:
-		print"The predicted price on " + formatDate(str(date)) + " is " + str(SVRrbf.predict(date)[0])
+		print"The predicted price for " + stockName + " on " + formatDate(str(date)) + " is " + str(SVRrbf.predict(date)[0])
 		output.write(date + "," + str(SVRrbf.predict(date)[0]) + "\n")
 	
 	output.close()
